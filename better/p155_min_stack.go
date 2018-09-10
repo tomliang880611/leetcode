@@ -1,5 +1,6 @@
 package better
 
+// MinStack is a stack and maintains smallest elements
 type MinStack struct {
 	// use to store smallest element the corresponding
 	// element array sees
@@ -8,7 +9,7 @@ type MinStack struct {
 	ptr      int
 }
 
-/** initialize your data structure here. */
+// Constructor initialize your data structure here
 func Constructor() MinStack {
 	array := make([]int, 10)
 	minArray := make([]int, 10)
@@ -20,44 +21,48 @@ func Constructor() MinStack {
 	}
 }
 
-func (this *MinStack) Push(x int) {
-	this.ptr++
-	if this.ptr >= len(this.array) {
-		newArray := make([]int, len(this.array)*2)
-		copy(newArray[:len(this.array)], this.array[:len(this.array)])
-		this.array = newArray
+// Push an element into min stack
+func (minstack *MinStack) Push(x int) {
+	minstack.ptr++
+	if minstack.ptr >= len(minstack.array) {
+		newArray := make([]int, len(minstack.array)*2)
+		copy(newArray[:len(minstack.array)], minstack.array[:len(minstack.array)])
+		minstack.array = newArray
 
-		newMinArray := make([]int, len(this.minArray)*2)
-		copy(newMinArray[:len(this.minArray)], this.minArray[:len(this.minArray)])
-		this.minArray = newMinArray
+		newMinArray := make([]int, len(minstack.minArray)*2)
+		copy(newMinArray[:len(minstack.minArray)], minstack.minArray[:len(minstack.minArray)])
+		minstack.minArray = newMinArray
 	}
 
-	this.array[this.ptr] = x
-	if this.ptr == 0 || x <= this.minArray[this.ptr-1] {
-		this.minArray[this.ptr] = x
+	minstack.array[minstack.ptr] = x
+	if minstack.ptr == 0 || x <= minstack.minArray[minstack.ptr-1] {
+		minstack.minArray[minstack.ptr] = x
 	} else {
-		this.minArray[this.ptr] = this.minArray[this.ptr-1]
+		minstack.minArray[minstack.ptr] = minstack.minArray[minstack.ptr-1]
 	}
 }
 
-func (this *MinStack) Pop() {
-	if this.ptr != -1 {
-		this.ptr--
+// Pop out an element
+func (minstack *MinStack) Pop() {
+	if minstack.ptr != -1 {
+		minstack.ptr--
 	}
 }
 
-func (this *MinStack) Top() int {
-	if this.ptr == -1 {
+// Top gets the element on top of min stack
+func (minstack *MinStack) Top() int {
+	if minstack.ptr == -1 {
 		return 0
 	}
-	return this.array[this.ptr]
+	return minstack.array[minstack.ptr]
 }
 
-func (this *MinStack) GetMin() int {
-	if this.ptr == -1 {
+// GetMin get the min value
+func (minstack *MinStack) GetMin() int {
+	if minstack.ptr == -1 {
 		return 0
 	}
-	return this.minArray[this.ptr]
+	return minstack.minArray[minstack.ptr]
 }
 
 /**
