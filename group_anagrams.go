@@ -10,9 +10,10 @@ func groupAnagrams(strs []string) [][]string {
 		// 1. sort.Slice could be used
 		// 2. sum could be generated
 		k := sortString(s)
-		if _, ok := m[k]; !ok {
-			m[k] = make([]string, 0)
-		}
+		// the following is redudant since slice is automatically provied with zero value
+		// if _, ok := m[k]; !ok {
+		// 	m[k] = make([]string, 0)
+		// }
 
 		m[k] = append(m[k], s)
 	}
