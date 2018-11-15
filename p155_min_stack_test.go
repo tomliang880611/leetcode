@@ -18,33 +18,33 @@ func Constructor() MinStack {
 	return MinStack{}
 }
 
-func (this *MinStack) Push(x int) {
+func (s *MinStack) Push(x int) {
 	n := &node{x, nil}
-	n.next = this.head
-	this.head = n
+	n.next = s.head
+	s.head = n
 
-	this.minArr = append(this.minArr, x)
-	sort.Ints(this.minArr)
+	s.minArr = append(s.minArr, x)
+	sort.Ints(s.minArr)
 }
 
-func (this *MinStack) Pop() {
-	n := this.head
+func (s *MinStack) Pop() {
+	n := s.head
 	v := n.val
-	if len(this.minArr) > 0 && this.minArr[0] == v {
-		this.minArr = this.minArr[1:]
+	if len(s.minArr) > 0 && s.minArr[0] == v {
+		s.minArr = s.minArr[1:]
 	}
 
-	this.head = n.next
+	s.head = n.next
 	n.next = nil
 }
 
-func (this *MinStack) Top() int {
-	n := this.head
+func (s *MinStack) Top() int {
+	n := s.head
 	return n.val
 }
 
-func (this *MinStack) GetMin() int {
-	return this.minArr[0]
+func (s *MinStack) GetMin() int {
+	return s.minArr[0]
 }
 
 /**
